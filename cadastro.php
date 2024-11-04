@@ -12,7 +12,7 @@
 </head>
 <body>
     <h2>CADASTRO</h2>
-    <form action="" method="post">
+        <form action="" method="post"> <!-- obrigatório -->
         <label>Nome:</label>
         <input type="text" name="nome" placeholder="Digite seu nome.">
         <label>Telefone:</label>
@@ -28,9 +28,9 @@
         </form>
 
         <?php
-            if(isset($_POST['nome']))
+            if(isset($_POST['nome'])) // por meio do metodo post ira guardar dentro da variavel, se tiver o campo nome:
             {
-                $nome = $_POST['nome'];
+                $nome = $_POST['nome']; // se foi preenchido será executado
                 $telefone = $_POST['tel'];
                 $email = $_POST['email'];
                 $senha = $_POST['senha'];
@@ -38,13 +38,13 @@
 
                 // verificar se todos os campo estão preenchidos
                 if(!empty($nome) && !empty($telefone) && !empty($email) && !empty($senha) && !empty($confSenha)) // condição nao tem ;
-                {
-                    $usuario->conectar("cadastroturma32", "localhost", "root", "");
-                    if($usuario->msgErro == "")
+                { // empty = preenchido
+                    $usuario->conectar("cadastroturma32", "localhost", "root", ""); // usuario tem quatro parâmetros
+                    if($usuario->msgErro == "") // se a mensagem de erro estiver vazia:
                     {
-                        if($senha == $confSenha)
+                        if($senha == $confSenha) // confirme senha
                         {
-                            if($usuario->cadastrar($nome, $telefone, $email, $senha))
+                            if($usuario->cadastrar($nome, $telefone, $email, $senha)) // então poderá se cadastrar
                             {
                                 ?>
 
@@ -89,8 +89,7 @@
 
                             <!-- essa area vai ser o html -->
                                 <div id="msn-sucesso">
-                                    <?php echo "Erro: ".
-                                    $usuario->msgErro; ?>
+                                    <?php echo "Erro: ".$usuario->msgErro; ?>
                                 </div>
                                 <!-- fim da area do html -->
                             

@@ -1,3 +1,9 @@
+<?php
+ require_once 'usuario.php';
+ $usuario = new Usuario();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,7 +14,7 @@
 <body>
     <h2>CRUD - CREATE READ UPDATE DELETE</h2>    
     <h3>Tela Login</h3>
-    <form action="areaprivada.php" method="post"> 
+    <form method="post"> 
         <label>Usuário:</label>
         <input type="email" name="email" id="" placeholer="Digite seu email.">
         <label>Senha:</label>
@@ -16,6 +22,41 @@
         <input type="submit" value="LOGAR">
         <a href="cadastro.php">CADASTRE-SE</a>
     </form>
+    <?php
+
+    if(isset($_POST['email']))
+    {
+        $email = addslashes($_POST['email']);
+        $senha = addslashes($_POST['senha']);
+
+        if(!empty($email) && !empty($email))
+        {
+            $usuario->conectar("cadastroturma32", "localhost", "root", "");
+            if($usuario->msgErro == "")
+            {
+                if($usuario->logar($email, $senha))
+                {
+                    header("location: areaprivada.php");
+                }
+            }
+            else
+            {
+                ?>
+
+                <!-- essa area vai ser o html -->
+                    <div id="msn-sucesso">
+                        Email e/ou senha estão incorretos.
+                    </div>
+                    <!-- fim da area do html -->
+                
+                <?php
+            }
+            
+        }
+    }
+
+
+    ?>
 
 </body>
 </html>

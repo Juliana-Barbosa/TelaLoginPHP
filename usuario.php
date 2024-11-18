@@ -46,7 +46,7 @@
             if($verificarEmailSenha->rowCount()>0)
             {
                 $dados = $verificarEmailSenha->fetch();
-                session_star();
+                session_start();
                 $_SESSION['id_usuario'] = $dados['id_usuario'];
                 return true;
             }
